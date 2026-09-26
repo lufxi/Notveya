@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Join a classroom — Notveya{% endblock %}
+
+{% block content %}
+<div class="container-narrow section-tight">
+  <h1 style="font-size:1.9rem;">Join a classroom</h1>
+  <p class="text-muted" style="margin-bottom:28px;">Enter the code your teacher shared with you.</p>
+
+  <div class="form-card">
+    <form method="POST" action="{{ url_for('student.join_classroom') }}">
+      <div class="field">
+        <label for="code">Classroom code</label>
+        <input type="text" id="code" name="code" placeholder="e.g. 7XQ2P1A" style="text-transform:uppercase;letter-spacing:2px;" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Join classroom</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

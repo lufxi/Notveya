@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ classroom.name }} — Notveya{% endblock %}
+
+{% block content %}
+<div class="container section-tight">
+  <div class="breadcrumb"><a href="{{ url_for('main.dashboard') }}">Your classrooms</a> / {{ classroom.name }}</div>
+
+  <div class="page-head">
+    <div>
+      <h1 style="font-size:1.9rem;">{{ classroom.name }}</h1>
+      <p class="text-muted" style="margin:0;">{{ classroom.subject or "General" }} &middot; taught by {{ classroom.teacher.name }}</p>
+    </div>
+  </div>
+
+  {% if materials %}
+    <div class="material-list">
+      {% for m in materials %}
+        {% set mine = my_ratings.get(m.id) %}
+        <div class="material-row">
+          <div class="material-icon {{ 'video' if m.file_type == 'video' else '' }}">{{ 'VID' if m.file_type == 'video' else 'DOC' }}</div>
+          <div class="material-body">
+            <h4>{{ m.title }}</h4>
+            <div class="meta">
+              Uploaded {{ m.uploaded_at | timeago }}
+              &middot; <span class="stars">★ {{ m.average_rating }} <span class="count">({{ m.rating_count }})</span></span>
+            </div>
+            {% if m.description %}<p class="desc">{{ m.description }}</p>{% endif %}
+
+            <details style="margin-top:10px;">
+              <summary style="cursor:pointer;color:var(--teal-deep);font-size:0.88rem;font-weight:600;">
+                {{ "Update your rating" if mine else "Rate this" }}
+              </summary>
+              <form method="POST" action="{{ url_for('main.rate_material', material_id=m.id) }}" style="margin-top:12px;max-width:380px;">
+                <div class="field">
+                  <div class="star-input">
+                    {% for i in range(5, 0, -1) %}
+                      <input type="radio" id="star{{ i }}-{{ m.id }}" name="stars" value="{{ i }}" {{ 'checked' if mine and mine.stars == i else '' }} required>
+                      <label for="star{{ i }}-{{ m.id }}">★</label>
+                    {% endfor %}
+                  </div>
+                </div>
+                <div class="field">
+                  <input type="text" name="comment" placeholder="Optional comment" value="{{ mine.comment if mine else '' }}">
+                </div>
+                <button type="submit" class="btn btn-gold btn-sm">Submit rating</button>
+              </form>
+            </details>
+          </div>
+          <div class="material-actions">
+            <a href="{{ url_for('main.download_material', material_id=m.id) }}" class="btn btn-primary btn-sm">Download</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <h3>Nothing here yet</h3>
+      <p>Your teacher hasn't uploaded any notes or videos to this classroom yet.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

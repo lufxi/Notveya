@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Notveya — a shared notebook for every classroom{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow-rule">for teachers and students</div>
+    <h1>One classroom, one shared notebook.</h1>
+    <p class="lede">Notveya is where teachers hand out notes and videos, and students collect, download and rate them — all inside classrooms built for the two of you, not a crowd.</p>
+    <div class="hero-actions">
+      <a href="{{ url_for('auth.register') }}?role=teacher" class="btn btn-gold">Start a classroom</a>
+      <a href="{{ url_for('auth.register') }}?role=student" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.5);">Join as a student</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">2</span><span class="label">roles, one platform</span></div>
+      <div class="hero-stat"><span class="num">&infin;</span><span class="label">notes &amp; videos per classroom</span></div>
+      <div class="hero-stat"><span class="num">★</span><span class="label">rated by the students who used them</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Built around how a classroom actually works</h2>
+      <p>Two accounts, two very different jobs. Notveya keeps both simple.</p>
+    </div>
+    <div class="role-grid">
+      <div class="role-card">
+        <h3>For teachers</h3>
+        <p class="text-muted">Set up a classroom in seconds, share the join code, and keep every handout in one place.</p>
+        <ul>
+          <li>Create a classroom and get a unique join code</li>
+          <li>Add students by their account email</li>
+          <li>Upload notes, slides and videos</li>
+          <li>See who's downloaded and rated each upload</li>
+        </ul>
+        <a href="{{ url_for('auth.register') }}?role=teacher" class="btn btn-primary btn-sm">Create your classroom</a>
+      </div>
+      <div class="role-card gold">
+        <h3>For students</h3>
+        <p class="text-muted">Join with a code your teacher gives you, then keep every class's materials at your fingertips.</p>
+        <ul>
+          <li>Join a classroom with a short code</li>
+          <li>Browse notes and videos by class</li>
+          <li>Download anything, anytime</li>
+          <li>Rate materials so classmates know what's worth their time</li>
+        </ul>
+        <a href="{{ url_for('auth.register') }}?role=student" class="btn btn-outline btn-sm">Create your account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="form-card" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+      <div>
+        <h3 style="margin-bottom:6px;">Already have an account?</h3>
+        <p class="text-muted" style="margin:0;">Sign in with your email, or with Google in one tap.</p>
+      </div>
+      <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Log in</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

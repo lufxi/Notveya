@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Your profile — Notveya{% endblock %}
+
+{% block content %}
+<div class="container-narrow section-tight">
+  <div class="profile-header">
+    {% if current_user.profile_pic and current_user.profile_pic != 'default.png' %}
+      <img class="profile-avatar-lg" src="{{ url_for('main.profile_pic_file', filename=current_user.profile_pic) }}" alt="">
+    {% else %}
+      <span class="profile-avatar-fallback-lg">{{ current_user.initials }}</span>
+    {% endif %}
+    <div>
+      <h1 style="font-size:1.7rem;margin-bottom:6px;">{{ current_user.name }}</h1>
+      <span class="role-pill">{{ current_user.role|capitalize }}</span>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h3 style="margin-bottom:18px;">Edit profile</h3>
+    <form method="POST" action="{{ url_for('main.profile') }}" enctype="multipart/form-data">
+      <div class="field">
+        <label for="profile_pic">Profile picture</label>
+        <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+        <div class="hint">PNG, JPG, GIF or WEBP.</div>
+      </div>
+      <div class="field">
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" value="{{ current_user.name }}" required>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" value="{{ current_user.email }}" disabled>
+        <div class="hint">Email can't be changed here.</div>
+      </div>
+      <div class="field">
+        <label for="institution">School / institution <span class="text-muted small">(optional)</span></label>
+        <input type="text" id="institution" name="institution" value="{{ current_user.institution or '' }}">
+      </div>
+      <div class="field">
+        <label for="bio">Short bio <span class="text-muted small">(optional)</span></label>
+        <textarea id="bio" name="bio" maxlength="300">{{ current_user.bio or '' }}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

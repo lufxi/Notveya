@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}New classroom — Notveya{% endblock %}
+
+{% block content %}
+<div class="container-narrow section-tight">
+  <h1 style="font-size:1.9rem;">Create a classroom</h1>
+  <p class="text-muted" style="margin-bottom:28px;">You'll get a short join code to share with your students right after.</p>
+
+  <div class="form-card">
+    <form method="POST" action="{{ url_for('teacher.create_classroom') }}">
+      <div class="field">
+        <label for="name">Classroom name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Grade 10 — Physics" required>
+      </div>
+      <div class="field">
+        <label for="subject">Subject <span class="text-muted small">(optional)</span></label>
+        <input type="text" id="subject" name="subject" placeholder="e.g. Physics">
+      </div>
+      <div class="field">
+        <label for="description">Description <span class="text-muted small">(optional)</span></label>
+        <textarea id="description" name="description" placeholder="What's this classroom for?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Create classroom</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

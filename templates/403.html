@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Access denied — Notveya{% endblock %}
+{% block content %}
+<div class="container-narrow section" style="text-align:center;">
+  <h1 style="font-size:2.4rem;">Not your classroom</h1>
+  <p class="text-muted" style="margin:0 auto 20px;">You don't have access to that page.</p>
+  <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Back to your dashboard</a>
+</div>
+{% endblock %}

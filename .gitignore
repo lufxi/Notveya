@@ -1,0 +1,10 @@
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+instance/
+static/uploads/materials/*
+static/uploads/profile_pics/*
+!static/uploads/materials/.gitkeep
+!static/uploads/profile_pics/.gitkeep

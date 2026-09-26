@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Page not found — Notveya{% endblock %}
+{% block content %}
+<div class="container-narrow section" style="text-align:center;">
+  <h1 style="font-size:2.4rem;">Page not found</h1>
+  <p class="text-muted" style="margin:0 auto 20px;">That page doesn't exist, or you followed a broken link.</p>
+  <a href="{{ url_for('main.index') }}" class="btn btn-primary">Back to Notveya</a>
+</div>
+{% endblock %}
