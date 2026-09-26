@@ -13,6 +13,12 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    _ca_path = os.path.join(basedir, "certs", "aiven-ca.pem")
+    if os.environ.get("DATABASE_URL") and os.path.exists(_ca_path):
+        SQLALCHEMY_ENGINE_OPTIONS = {
+            "connect_args": {"ssl_ca": _ca_path}
+        }
+
     GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", "")
     GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
 
